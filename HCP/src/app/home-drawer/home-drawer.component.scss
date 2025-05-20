@@ -1,0 +1,41 @@
+.container {
+    border: 1px solid black;
+    padding:  10px;
+    margin-bottom: 10px;
+    max-width: 900px;
+}
+
+.title {
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+.tools-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 15px;
+    .tool-container {
+        display: flex;
+    }
+
+    .tool-title {
+        font-size: 12px;
+    }
+    .tool-description {
+        font-size: 11px;
+    }
+}
+
+.tool-info-container {
+    max-width: 150px;
+}
+
+.image-container {
+    max-width: 25px;
+    margin-right: 10px;
+    img {
+        position: relative;
+        top: 5px;
+        max-width: 100%;
+    }
+}

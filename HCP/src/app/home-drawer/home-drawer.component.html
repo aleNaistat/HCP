@@ -1,0 +1,14 @@
+<div class="container">
+  <h3 class="title">{{ section.title }}</h3>
+  <div class="tools-container">
+  <div *ngFor="let tool of section.tools" class="tool-container">
+      <div class="image-container">
+          <img src="{{ tool.icon }}"/>
+      </div>
+      <div class="tool-info-container">
+          <p class="tool-title"><b>{{ tool.title }}</b></p>
+          <p class="tool-description">{{ tool.desc }}</p>
+      </div>
+  </div>
+</div>
+</div>
