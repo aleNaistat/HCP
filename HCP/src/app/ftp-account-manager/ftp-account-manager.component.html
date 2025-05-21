@@ -1,0 +1,106 @@
+<div id="ftpAccount" class="wrap">
+  <!-- Top Bar with Usage Indicator -->
+  <div class="top_bar clearfix">
+    <h1>FTP Account Manager</h1>
+    <div class="count_cont clearfix">
+      <div class="count_type">FTP Accounts:</div>
+      <div class="count_img">
+        <div class="counterProgress" [style.width.%]="serviceDetail.percentageUsed"></div>
+      </div>
+      <div class="count_used">{{ serviceDetail.activeQuantity }} of {{ serviceDetail.limit }} used</div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="inside">
+    <h2 class="subtitle">Your FTP Account Information</h2>
+    <div class="col1">
+      <p>Please see the TIP section below to determine whether FTP is right for you.</p>
+      <ul class="item">
+        <li><strong>FTP Server/Host Address</strong></li>
+        <li>{{ domainAlias }}</li>
+      </ul>
+    </div>
+    <div class="col2">
+      <p>
+        <strong>Reset File Permissions</strong><br />
+        Are you having trouble uploading your files or running CGI scripts?<br />
+        Resetting your file permissions might help.<br />
+        <a href="#" (click)="resetFilePermissions()">Reset File Permissions</a>
+      </p>
+    </div>
+    <br style="clear: left;" />
+
+    <p>Edit your login settings or select an account to log in to below:</p>
+
+    <!-- FTP Accounts Table -->
+    <form >
+      <table class="nsblue" cellpadding="0" cellspacing="0">
+        <tr>
+          <td class="head" colspan="4">FTP User Accounts</td>
+        </tr>
+        <tr>
+          <td class="sub_head"></td>
+          <td class="sub_head">FTP User ID</td>
+          <td class="sub_head">
+            FTP Password
+            <a href="#" (click)="togglePasswordVisibility()" *ngIf="showPasswordButton">
+              {{ showPasswords ? 'hide' : 'show' }}
+            </a>
+          </td>
+          <td class="sub_head">File Path</td>
+        </tr>
+        <tr *ngFor="let account of ftpAccounts; let i = index" [ngClass]="i % 2 === 0 ? 'even' : 'odd'">
+          <td>
+            <input type="radio" formControlName="ftp_id" [value]="account.id" [id]="'ftp_' + account.id" />
+          </td>
+          <td>
+            <a href="#" (click)="editAccount(account.id)">{{ account.username }}</a>
+          </td>
+          <td id="pwd_col_{{ account.id }}">{{ showPasswords ? account.actualPassword : '********' }}</td>
+          <td>{{ account.relativePath }}</td>
+        </tr>
+        <tr>
+          <td class="foot" colspan="4">
+            <ul class="foot_list clearfix">
+              <li><a href="#" (click)="editAccount(form.get('ftp_id')?.value)">Edit</a></li>
+              <li><a href="#" (click)="deleteAccount(form.get('ftp_id')?.value)">Delete</a></li>
+              <li class="right">
+                <button mat-raised-button color="primary" (click)="addAccount()">Add</button>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </form>
+
+    <!-- Tips Section -->
+    <div class="tips_cont">
+      <div class="tips_icon"></div>
+      <div *ngIf="showTIPSection">
+        <p *ngIf="platform === 'WIN'">
+          NOTE: If you're using the <a href="#">Website Builder</a>, <a href="#">FTP File Publisher</a> or
+          <a href="{{ fileman }}">File Manager</a> you will not need to use FTP...
+        </p>
+        <p *ngIf="platform === 'UNIX'">
+          NOTE: For UNIX platforms, FTP is available without Website Builder or File Publisher options.
+        </p>
+        <p><strong>What is FTP for?</strong></p>
+        <p>FTP stands for File Transfer Protocol. FTP software allows you to copy files from your local computer to your website or vice-versa.</p>
+        <p><strong>When would you want to use FTP software?</strong></p>
+        <p>You may want to use FTP Software when you've designed a site yourself on your computer...</p>
+        <p><strong>We recommend the following FTP program:</strong></p>
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td width="80">- SmartFTP</td>
+            <td><a href="http://www.smartftp.com" target="_blank">Home page</a></td>
+          </tr>
+          <tr>
+            <td>- FileZilla</td>
+            <td><a href="http://www.filezilla-project.org" target="_blank">Home page</a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
