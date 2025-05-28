@@ -21,6 +21,7 @@ export class HcpHomeMenuComponent {
       },
       {   
         title: 'FTP Account Manager',
+        routing: '/ftp-manager',
         desc: 'Manage your FTP accounts',
         icon: 'https://cdn3.iconfinder.com/data/icons/solid-locations-icon-set/64/Working_Tools_2-128.png'
       },
@@ -34,9 +35,30 @@ export class HcpHomeMenuComponent {
         desc: 'Create and restore back ups with CodeGuard',
         icon: 'https://cdn3.iconfinder.com/data/icons/solid-locations-icon-set/64/Working_Tools_2-128.png'
       },
+      {   
+        title: 'Cloud Backup',
+        desc: 'Create and restore back ups with CodeGuard',
+        icon: 'https://cdn3.iconfinder.com/data/icons/solid-locations-icon-set/64/Working_Tools_2-128.png'
+      },
+      {   
+        title: 'Cloud Backup',
+        desc: 'Create and restore back ups with CodeGuard',
+        icon: 'https://cdn3.iconfinder.com/data/icons/solid-locations-icon-set/64/Working_Tools_2-128.png'
+      },
+      {   
+        title: 'Cloud Backup',
+        desc: 'Create and restore back ups with CodeGuard',
+        icon: 'https://cdn3.iconfinder.com/data/icons/solid-locations-icon-set/64/Working_Tools_2-128.png'
+      },
+      {   
+        title: 'Cloud Backup',
+        desc: 'Create and restore back ups with CodeGuard',
+        icon: 'https://cdn3.iconfinder.com/data/icons/solid-locations-icon-set/64/Working_Tools_2-128.png'
+      },
+      
   ]},
   { 
-    title: 'Most Popular Tools', 
+    title: 'Security', 
     tools: [
       {
         title: 'Website Builder Tool',

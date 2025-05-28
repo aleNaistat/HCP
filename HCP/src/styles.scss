@@ -29,3 +29,21 @@ h1, h2, h3, h4, h5, p, a, div {
     padding: 0;
     margin: 0;
 }
+
+//material resets
+.mat-expansion-panel {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+.mat-expansion-panel-body {
+    padding: 0 !important;
+    .tool-title {
+        margin-bottom: 5px !important; 
+    }
+    p {
+        line-height: 12px;
+        letter-spacing: 0.1px;
+        font-size: 11px;
+    }
+}
