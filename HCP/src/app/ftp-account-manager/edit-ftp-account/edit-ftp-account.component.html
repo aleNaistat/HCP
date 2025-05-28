@@ -1,0 +1,145 @@
+<div class="wrap">
+  <div class="top-bar">
+    <h1>FTP Account Manager</h1>
+    <div class="count-cont">
+      <span class="count-type">FTP Accounts:</span>
+      <div class="count-img">
+        <div class="counter-progress" [style.width.%]="(activeQuantity / limit) * 100"></div>
+      </div>
+      <span class="count-used">{{ activeQuantity }} of {{ limit }} used</span>
+    </div>
+  </div>
+
+  <div class="inside">
+    <p>
+      If you're using the <a href="#">Website Builder</a>, <a href="#">FTP File Publisher</a>, or
+      <a href="#">File Manager</a>, you will not need to use FTP. In Website Builder, you may upload
+      files by hitting the "Publish" button. In <a href="#">File Manager</a>, you can do so by hitting
+      the "Upload" button, and in <a href="#">FTP File Publisher</a>, you may drag and drop files from
+      your computer to your website.
+    </p>
+
+    <mat-card class="warning" *ngIf="showWarning">
+      <strong>Please note the following:</strong>
+      <p>The data has not been modified, and the request cannot be sent. If you do not wish to make modifications, please click the cancel button.</p>
+      <ul>
+        <li>Your FTP username must contain 9 to 20 characters, consisting of alphanumeric characters, underscores, or percentages.</li>
+        <li>Your password must contain 6 to 16 characters, with at least one character from 3 of the following 4 categories: uppercase, lowercase, numeric digit, or non-alphanumeric characters.</li>
+      </ul>
+    </mat-card>
+
+    <mat-card class="gray-box">
+      <h2>Edit FTP Account</h2>
+      <div class="inside">
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+          <div class="permissions" *ngIf="showPermissions">
+            <button mat-raised-button color="primary" (click)="onPermissionsSubmit()">Permissions</button>
+            <a href="#" (click)="false">Account</a>
+          </div>
+          <table class="create-form">
+            <tr>
+              <td class="title-col"><strong>FTP Server/Host Address:</strong></td>
+              <td class="field-col">
+                <mat-form-field appearance="fill">
+                  <mat-label>FTP Server/Host Address</mat-label>
+                  <input matInput formControlName="domainAlias" readonly />
+                </mat-form-field>
+              </td>
+              <td class="third-col">
+                <input type="hidden" formControlName="id" />
+              </td>
+            </tr>
+            <tr>
+              <td class="title-col"><strong>FTP User ID:</strong></td>
+              <td class="field-col">
+                <mat-form-field appearance="fill">
+                  <mat-label>FTP User ID</mat-label>
+                  <input matInput formControlName="username" />
+                  <mat-error *ngIf="editForm.get('username')?.hasError('required')">Required</mat-error>
+                  <mat-error *ngIf="editForm.get('username')?.hasError('minlength') || editForm.get('username')?.hasError('maxlength')">
+                    Must be 9-20 characters
+                  </mat-error>
+                  <mat-error *ngIf="editForm.get('username')?.hasError('pattern')">
+                    Only alphanumeric, underscore, or percentage allowed
+                  </mat-error>
+                </mat-form-field>
+              </td>
+              <td class="third-col"></td>
+            </tr>
+            <tr>
+              <td class="title-col"><strong>FTP Password:</strong></td>
+              <td class="field-col">
+                <mat-form-field appearance="fill">
+                  <mat-label>FTP Password</mat-label>
+                  <input matInput type="password" formControlName="password" />
+                  <mat-error *ngIf="editForm.get('password')?.hasError('minlength') || editForm.get('password')?.hasError('maxlength')">
+                    Must be 6-16 characters
+                  </mat-error>
+                  <mat-error *ngIf="editForm.get('password')?.hasError('complexPassword')">
+                    Must include 3 of: uppercase, lowercase, number, special character
+                  </mat-error>
+                </mat-form-field>
+              </td>
+              <td class="third-col">Enter only to change password</td>
+            </tr>
+            <tr>
+              <td class="title-col"><strong>Confirm Password:</strong></td>
+              <td class="field-col">
+                <mat-form-field appearance="fill">
+                  <mat-label>Confirm Password</mat-label>
+                  <input matInput type="password" formControlName="confirmPassword" />
+                  <mat-error *ngIf="editForm.hasError('mismatch')">Passwords do not match</mat-error>
+                </mat-form-field>
+              </td>
+              <td class="third-col">Enter only to change password</td>
+            </tr>
+            <tr>
+              <td class="title-col"><strong>Description:</strong></td>
+              <td class="field-col">
+                <mat-form-field appearance="fill">
+                  <mat-label>Description</mat-label>
+                  <input matInput formControlName="description" />
+                </mat-form-field>
+              </td>
+              <td class="third-col"></td>
+            </tr>
+            <tr>
+              <td class="title-col"><strong>Directory:</strong></td>
+              <td class="field-col">
+                <mat-form-field appearance="fill">
+                  <mat-label>Directory</mat-label>
+                  <input matInput formControlName="relativePath" [disabled]="isDefaultUser" />
+                </mat-form-field>
+                <input *ngIf="isDefaultUser" type="hidden" name="isDefaultUser" value="true" />
+              </td>
+              <td class="third-col"></td>
+            </tr>
+            <!-- SSH Checkbox (commented out as per JSP) -->
+            <!-- <tr *ngIf="platform === 'UNIX' && showSshCheckbox">
+              <td class="title-col"><strong>SSH Access:</strong></td>
+              <td class="field-col">
+                <mat-checkbox formControlName="sshAccess">Enable SSH Access</mat-checkbox>
+              </td>
+              <td class="third-col"></td>
+            </tr> -->
+            <tr>
+              <td class="title-col"></td>
+              <td colspan="2" class="text-col">
+                The "{{ directoryContent }}" directory is where your website content is stored. If you leave this as the default,
+                this account will log directly into the "{{ directoryContent }}" directory. You may also specify another directory,
+                which is useful for granting access to specific files for others.
+                <br /><br />
+                To restrict access to a specific directory, enter the directory name above. This account will log directly into
+                that directory and will not have access to any parent directories.
+              </td>
+            </tr>
+          </table>
+          <div class="btn-container">
+            <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancel</button>
+            <button mat-raised-button color="primary" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </mat-card>
+  </div>
+</div>

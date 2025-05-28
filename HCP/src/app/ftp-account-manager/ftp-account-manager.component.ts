@@ -72,14 +72,14 @@ export class FtpAccountManagerComponent {
   deleteAccount(id: number | null) {
     if (id) {
       this.form.patchValue({ ftp_id: id });
-      this.router.navigate(['/ftpaccounts/delete', id]);
+      this.router.navigate(['/ftp-manager/delete', id]);
     } else {
       console.warn('No FTP account selected for deletion.');
     }
   }
 
   addAccount() {
-    this.router.navigate(['/ftpaccounts/add']);
+    this.router.navigate(['/ftp-manager/add']);
   }
 
   resetFilePermissions() {
