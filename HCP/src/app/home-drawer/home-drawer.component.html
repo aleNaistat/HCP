@@ -1,14 +1,38 @@
-<div class="container">
-  <h3 class="title">{{ section.title }}</h3>
-  <div class="tools-container">
-  <div *ngFor="let tool of section.tools" class="tool-container">
-      <div class="image-container">
-          <img src="{{ tool.icon }}"/>
-      </div>
-      <div class="tool-info-container">
-          <p class="tool-title"><b>{{ tool.title }}</b></p>
-          <p class="tool-description">{{ tool.desc }}</p>
-      </div>
-  </div>
-</div>
+<div class="container">     
+    <h3 class="title">{{ section.title }}</h3>     
+    
+    <!-- Always show first 6 tools -->
+    <div class="tools-container">         
+        <div *ngFor="let tool of section.tools.slice(0, 6)" class="tool-container" (click)="navigateToTool(tool.routing)">             
+            <div class="image-container">                 
+                <img src="{{ tool.icon }}"/>             
+            </div>             
+            <div class="tool-info-container">                 
+                <p class="tool-title"><b>{{ tool.title }}</b></p>                 
+                <p class="tool-description">{{ tool.desc }}</p>             
+            </div>         
+        </div>         
+    </div>
+    
+    <!-- Accordion for remaining tools (7+) -->
+    <mat-expansion-panel [expanded]="isPanelExpanded" *ngIf="section.tools.length > 6">         
+        <div class="tools-container">         
+            <div *ngFor="let tool of section.tools.slice(6)" class="tool-container" 
+            (click)="navigateToTool(tool.routing)">             
+                <div class="image-container">                 
+                    <img src="{{ tool.icon }}"/>             
+                </div>             
+                <div class="tool-info-container">                 
+                    <p class="tool-title"><b>{{ tool.title }}</b></p>                 
+                    <p class="tool-description">{{ tool.desc }}</p>             
+                </div>         
+            </div>         
+        </div>      
+    </mat-expansion-panel>     
+    
+    <div *ngIf="section.tools.length > 6" 
+         class="hide-bar" 
+         (click)="togglePanel()">
+        {{ isPanelExpanded ? 'Hide' : 'Show More' }}
+    </div>     
 </div>
