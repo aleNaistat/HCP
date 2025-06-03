@@ -1,7 +1,6 @@
 <div class="container">     
     <h3 class="title">{{ section.title }}</h3>     
     
-    <!-- Always show first 6 tools -->
     <div class="tools-container">         
         <div *ngFor="let tool of section.tools.slice(0, 6)" class="tool-container" (click)="navigateToTool(tool.routing)">             
             <div class="image-container">                 
@@ -14,7 +13,6 @@
         </div>         
     </div>
     
-    <!-- Accordion for remaining tools (7+) -->
     <mat-expansion-panel [expanded]="isPanelExpanded" *ngIf="section.tools.length > 6">         
         <div class="tools-container">         
             <div *ngFor="let tool of section.tools.slice(6)" class="tool-container" 
