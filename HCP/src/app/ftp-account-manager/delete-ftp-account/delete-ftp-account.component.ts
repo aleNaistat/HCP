@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule, ActivatedRoute } from '@angular/router';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-delete-ftp-account',
   standalone: true,
@@ -32,7 +32,7 @@ export class DeleteFtpAccountComponent implements OnInit {
   }; // Mock ftpAccountModel
   displayedColumns: string[] = ['select', 'username', 'path'];
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
     this.deleteForm = this.fb.group({
       id: [this.ftpAccount.id],
       username: [this.ftpAccount.username],
@@ -64,6 +64,6 @@ export class DeleteFtpAccountComponent implements OnInit {
   onCancel(): void {
     console.log('Cancelled');
     // Navigate to FTP accounts list
-    // this.router.navigate(['/material']);
+    this.router.navigate(['/ftp-manager']);
   }
 }

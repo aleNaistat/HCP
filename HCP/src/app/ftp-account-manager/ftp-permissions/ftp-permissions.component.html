@@ -1,0 +1,113 @@
+<div class="wrap">
+  <div class="top-bar">
+    <h1>FTP Account Manager</h1>
+    <div class="count-cont">
+      <span class="count-type">FTP Accounts:</span>
+      <div class="count-img">
+        <div class="counter-progress" [style.width.%]="(activeQuantity / limit) * 100"></div>
+      </div>
+      <span class="count-used">{{ activeQuantity }} of {{ limit }} used</span>
+    </div>
+  </div>
+
+  <div class="inside">
+    <p *ngIf="showTipSection && platform === 'WIN'">
+      For Windows hosting, use the <a href="/filemanager">File Manager</a> to upload files.
+    </p>
+    <p *ngIf="showTipSection && platform === 'UNIX'">
+      For Unix hosting, use FTP clients or the File Manager for file management.
+    </p>
+
+    <mat-tab-group>
+      <mat-tab label="Account">
+        <app-edit-ftp-account></app-edit-ftp-account>
+      </mat-tab>
+      <mat-tab label="Permissions">
+        <mat-card class="gray-box">
+          <h2 *ngIf="serverType !== 'WIN2K8'">FTP Account Permissions</h2>
+          <h2 *ngIf="serverType === 'WIN2K8'">Manage Permissions</h2>
+          <div class="inside">
+            <form [formGroup]="permissionsForm" (ngSubmit)="onSubmit()">
+              <input type="hidden" formControlName="id" />
+              <input type="hidden" formControlName="username" />
+              <input type="hidden" formControlName="relativePath" />
+
+              <div *ngIf="serverType !== 'WIN2K8'">
+                <p>Specify the permissions for this FTP account by checking the appropriate box(s) below:</p>
+                <table class="ftp-permissions">
+                  <tr>
+                    <td class="title-col"><strong>File Permissions:</strong></td>
+                    <td class="field-col"><mat-checkbox formControlName="read">Read</mat-checkbox></td>
+                    <td class="third-col">Read</td>
+                    <td class="field-col"><mat-checkbox formControlName="append">Append</mat-checkbox></td>
+                    <td class="third-col">Append</td>
+                  </tr>
+                  <tr>
+                    <td class="title-col"></td>
+                    <td class="field-col"><mat-checkbox formControlName="write">Write</mat-checkbox></td>
+                    <td class="third-col">Write</td>
+                    <td class="field-col"><mat-checkbox formControlName="delete">Delete</mat-checkbox></td>
+                    <td class="third-col">Delete</td>
+                  </tr>
+                  <tr>
+                    <td class="title-col"></td>
+                    <td class="field-col"><mat-checkbox formControlName="execute">Execute</mat-checkbox></td>
+                    <td class="third-col">Execute</td>
+                    <td class="field-col"></td>
+                    <td class="third-col"></td>
+                  </tr>
+                  <tr><td colspan="5">&nbsp;</td></tr>
+                  <tr>
+                    <td class="title-col"><strong>Directory Permissions:</strong></td>
+                    <td class="field-col"><mat-checkbox formControlName="list">List</mat-checkbox></td>
+                    <td class="third-col">List</td>
+                    <td class="field-col"><mat-checkbox formControlName="remove">Remove</mat-checkbox></td>
+                    <td class="third-col">Remove</td>
+                  </tr>
+                  <tr>
+                    <td class="title-col"></td>
+                    <td class="field-col"><mat-checkbox formControlName="make">Make</mat-checkbox></td>
+                    <td class="third-col">Make</td>
+                    <td class="field-col"><mat-checkbox formControlName="inherit">Inherit</mat-checkbox></td>
+                    <td class="third-col">Inherit</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div *ngIf="serverType === 'WIN2K8'">
+                <p>Set or remove this user's permissions for a folder or a specific file</p>
+                <table class="ftp-permissions">
+                  <tr>
+                    <td class="title-col"><strong>Username:</strong></td>
+                    <td class="field-col">{{ permissionsForm.get('username')?.value }}</td>
+                  </tr>
+                  <tr>
+                    <td class="title-col"><strong>Path:</strong></td>
+                    <td class="field-col">{{ permissionsForm.get('relativePath')?.value }}</td>
+                  </tr>
+                  <tr>
+                    <td class="title-col"><strong>Permissions:</strong></td>
+                    <td class="field-col">
+                      <mat-radio-group formControlName="permissionwin">
+                        <mat-radio-button value="100">Read</mat-radio-button><br />
+                        <mat-radio-button value="010">Read/Write</mat-radio-button><br />
+                        <mat-radio-button value="001">Read/Write/Delete</mat-radio-button><br />
+                        <mat-radio-button value="000">None</mat-radio-button><br />
+                      </mat-radio-group>
+                      <mat-checkbox formControlName="inherit">Inherit</mat-checkbox>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="btn-container">
+                <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancel</button>
+                <button mat-raised-button color="primary" type="submit">OK</button>
+              </div>
+            </form>
+          </div>
+        </mat-card>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

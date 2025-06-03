@@ -1,0 +1,114 @@
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.top-bar {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.inside {
+  padding: 20px;
+}
+
+.relative {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.absolute-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #f5f5f5;
+  padding: 15px;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.procent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.bar {
+  flex-grow: 1;
+  height: 10px;
+  background: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.bar div {
+  height: 100%;
+  background: #00BCD4; /* Azure primary */
+  transition: width 0.3s;
+}
+
+.red {
+  color: #f44336;
+}
+
+.inst-apps {
+  margin-top: 20px;
+}
+
+.inst-apps-in {
+  margin-bottom: 20px;
+}
+
+h5 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+h5 img {
+  width: 32px;
+  height: 32px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+.table th, .table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.manage-apps {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  background: #fafafa;
+}
+
+.manage-column {
+  flex: 1;
+}
+
+.manage-column a {
+  display: block;
+  margin-bottom: 8px;
+  color: #00BCD4;
+  text-decoration: none;
+}
+
+.manage-column a:hover {
+  text-decoration: underline;
+}
+
+.bottom-button {
+  margin-top: 10px;
+  text-align: right;
+}

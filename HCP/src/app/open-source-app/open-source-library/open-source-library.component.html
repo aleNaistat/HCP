@@ -1,0 +1,155 @@
+<div class="wrap">
+  <div class="top-bar">Open Source Library</div>
+  <div class="inside">
+    <div class="relative">
+      <p>
+        <ng-container *ngIf="sCode === 'UNIX'; else nonUnix">
+          Add value to your website with an Open Source Application. Easy to install and easy to upgrade, you can add blogs, wikis, even ecommerce applications or a fully-fledged content management system.
+        </ng-container>
+        <ng-template #nonUnix>
+          Add value to your website with an Open Source Application. Easy to install and easy to upgrade, you can add blogs or a fully-fledged content management system.
+        </ng-template>
+        <br /><br />
+        <span class="red">New!</span> Open Source Applications Just Added. Check it Out!
+        <br /><br />
+        <button mat-raised-button color="primary" routerLink="/open-source-app/list">Install New App</button>
+      </p>
+
+      <div class="absolute-box">
+        <h3>Status</h3>
+        <div *ngFor="let service of serviceDetailList">
+          <p>
+            <strong>{{ getDatabaseType(service.serviceCode) }}:</strong><br />
+            {{ service.activeQuantity }} of {{ service.limit }} Used
+          </p>
+          <div class="procent">
+            <span>0%</span>
+            <div class="bar">
+              <div [style.width.%]="service.percentageUsed"></div>
+            </div>
+            <b>100%</b>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="inst-apps">
+      <h4>My Installed Apps</h4>
+      <div class="inst-apps-cont">
+        <div class="inst-apps-cont-in">
+          <div class="inst-apps-in" *ngFor="let group of appGroups">
+            <h5>
+              <img [src]="getAppIcon(group.name)" [alt]="group.name" />
+              <b>{{ group.name }}</b>
+            </h5>
+            <table mat-table [dataSource]="group.openSourceApps" class="table">
+              <ng-container matColumnDef="empty">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let app"></td>
+              </ng-container>
+              <ng-container matColumnDef="address">
+                <th mat-header-cell *matHeaderCellDef>Address</th>
+                <td mat-cell *matCellDef="let app">
+                  <a href="http://{{ app.domainPath }}{{ app.httpPath }}" target="_blank" (click)="openManageApp(app)">
+                    http://{{ app.domainPath }}{{ app.httpPath }}
+                  </a>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="installedOn">
+                <th mat-header-cell *matHeaderCellDef>Installed On</th>
+                <td mat-cell *matCellDef="let app">{{ app.dateInstalled }}</td>
+              </ng-container>
+              <ng-container matColumnDef="lastUpdated">
+                <th mat-header-cell *matHeaderCellDef>Last Updated</th>
+                <td mat-cell *matCellDef="let app">{{ app.lastUpgradeDate }}</td>
+              </ng-container>
+              <ng-container matColumnDef="dbStatus">
+                <th mat-header-cell *matHeaderCellDef>Database Status</th>
+                <td mat-cell *matCellDef="let app">{{ getStatusText(app.statusCode) }}</td>
+              </ng-container>
+              <ng-container matColumnDef="manage">
+                <th mat-header-cell *matHeaderCellDef>Manage</th>
+                <td mat-cell *matCellDef="let app">
+                  <button mat-button *ngIf="app.statusCode === 'PROCESSED'" (click)="app.expanded = !app.expanded">
+                    Manage
+                  </button>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="['empty', 'address', 'installedOn', 'lastUpdated', 'dbStatus', 'manage']"></tr>
+              <tr mat-row *matRowDef="let app; columns: ['empty', 'address', 'installedOn', 'lastUpdated', 'dbStatus', 'manage']"></tr>
+              <tr mat-row *matRowDef="let app; columns: ['expanded']; when: isExpansionRow">
+                <td mat-cell colspan="6">
+                  <mat-expansion-panel [expanded]="app.expanded">
+                    <mat-expansion-panel-header style="display: none;"></mat-expansion-panel-header>
+                    <div class="manage-apps">
+                      <div class="manage-column">
+                        <div *ngIf="app.loginPageLink">
+                          <a href="http://{{ app.domainPath }}{{ app.httpPath }}{{ app.loginPageLink }}" target="_blank">
+                            {{ app.appType === 'mambo' ? 'Admin ' : '' }}{{ app.appName || app.appType }} Login Page
+                          </a>
+                        </div>
+                        <div *ngIf="app.loginPageLink">
+                          <a href="http://{{ app.domainPath }}{{ app.httpPath }}{{ app.resetPasswdLink }}" target="_blank">
+                            Reset Admin Password
+                          </a>
+                        </div>
+                        <div>
+                          <a href="{{ app.helpLink }}" target="_blank">Help Link</a>
+                        </div>
+                      </div>
+                      <div class="manage-column">
+                        <div>
+                          <a (click)="performOperation(app.appId, app.appType, 'remove')">Remove this {{ app.appType }}</a>
+                        </div>
+                        <div *ngIf="group.name !== 'mediawiki'">
+                          <a (click)="performOperation(app.appId, app.appType, 'repair')">Repair this {{ app.appType }}</a>
+                        </div>
+                        <div *ngIf="serviceDetailList.some(s => s.serviceCode === 'UNIX_BASE') && app.appType !== 'screwturnwiki' && app.dbIp">
+                          <a (click)="openPhpMyAdmin(app.dbId)">Manage database for this {{ app.appType }}</a>
+                        </div>
+                      </div>
+                      <div class="manage-column">
+                        <div>
+                          <a (click)="performOperation(app.appId, app.appType, 'reinstall', app.version)">Reinstall this {{ app.appType }}</a>
+                        </div>
+                        <div *ngIf="app.defaultPage">
+                          <a (click)="performOperation(app.appId, app.appType, 'unsethomepage')">Unset this {{ app.appType }} my homepage</a>
+                        </div>
+                        <div *ngIf="!app.defaultPage">
+                          <a (click)="performOperation(app.appId, app.appType, 'sethomepage')">Make this {{ app.appType }} my homepage</a>
+                        </div>
+                        <div *ngIf="app.appType === 'DotNetNuke' || app.appType === 'dotnetnuke'">
+                          <a href="/assets/dotnetnukeinfo.html" target="_blank">FIRST TIME LOGIN INFO</a>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+                </td>
+              </tr>
+            </table>
+            <div class="bottom-button">
+              <ng-container *ngIf="group.openSourceApps.length >= appLimit">
+                <span>Application limit reached</span>
+              </ng-container>
+              <ng-container *ngIf="group.openSourceApps.length < appLimit">
+                <ng-container *ngIf="group.name !== 'OSCommerce'">
+                  <ng-container *ngIf="group.name !== 'screwturnwiki'">
+                    <ng-container *ngIf="(group.dataBaseServiceCode === '') || (group.dataBaseServiceCode === 'base-database-mssql' && mssqlQuantityAvailable > 0) || (group.dataBaseServiceCode === 'base-database-mysql5' && mysqlQuantityAvailable > 0)">
+                      <button mat-raised-button color="primary" (click)="installApp(group.name, group.category)">Add New</button>
+                    </ng-container>
+                    <ng-container *ngIf="(group.dataBaseServiceCode === 'base-database-mssql' && mssqlQuantityAvailable === 0) || (group.dataBaseServiceCode === 'base-database-mysql5' && mysqlQuantityAvailable === 0)">
+                      <span>Database limit reached</span>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+                <ng-container *ngIf="group.name === 'OSCommerce'">
+                  <span>Cannot add this type of application.</span>
+                </ng-container>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
