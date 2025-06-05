@@ -4,15 +4,16 @@
     <div class="relative">
       <p>
         <ng-container *ngIf="sCode === 'UNIX'; else nonUnix">
-          Add value to your website with an Open Source Application. Easy to install and easy to upgrade, you can add blogs, wikis, even ecommerce applications or a fully-fledged content management system.
+          Add value to your website with an Open Source Application. Easy to install and easy to upgrade, you can add blogs, wikis, even ecommerce applications, or even a fully-fledged content management system.
         </ng-container>
         <ng-template #nonUnix>
-          Add value to your website with an Open Source Application. Easy to install and easy to upgrade, you can add blogs or a fully-fledged content management system.
+          Add value to your website with an Open Source Application. Easy to install and easy to upgrade, you can add blogs or or a fully-fledged a content management system.
         </ng-template>
         <br /><br />
-        <span class="red">New!</span> Open Source Applications Just Added. Check it Out!
-        <br /><br />
-        <button mat-raised-button color="primary" routerLink="/open-source-app/list">Install New App</button>
+        <span class="red">New app</span> <span> Source Applications Just Added. Check it Out!</span>
+        <br />
+        <br />
+        <button mat-raised-button color="primary" routerLink="/open-source/list-source-app">Install New App</button>
       </p>
 
       <div class="absolute-box">
@@ -27,7 +28,6 @@
             <div class="bar">
               <div [style.width.%]="service.percentageUsed"></div>
             </div>
-            <b>100%</b>
           </div>
         </div>
       </div>
@@ -104,7 +104,7 @@
                         <div *ngIf="group.name !== 'mediawiki'">
                           <a (click)="performOperation(app.appId, app.appType, 'repair')">Repair this {{ app.appType }}</a>
                         </div>
-                        <div *ngIf="serviceDetailList.some(s => s.serviceCode === 'UNIX_BASE') && app.appType !== 'screwturnwiki' && app.dbIp">
+                        <div *ngIf="canManageDatabase(app)">
                           <a (click)="openPhpMyAdmin(app.dbId)">Manage database for this {{ app.appType }}</a>
                         </div>
                       </div>

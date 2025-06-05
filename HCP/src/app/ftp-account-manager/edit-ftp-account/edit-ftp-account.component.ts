@@ -26,13 +26,13 @@ import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 })
 export class EditFtpAccountComponent implements OnInit {
   editForm: FormGroup;
-  platform: string = 'UNIX'; // Mock platform
-  activeQuantity: number = 2; // Mock serviceDetail.activeQuantity
-  limit: number = 50; // Mock serviceDetail.limit
+  platform: string = 'UNIX'; 
+  activeQuantity: number = 2;
+  limit: number = 50; 
   directoryContent: string = this.platform === 'WIN' ? '/www' : '/htdocs';
-  showPermissions: boolean = false; // Mock showPermissions
-  showSshCheckbox: boolean = false; // Mock showSshCheckbox
-  isDefaultUser: boolean = false; // Mock ftpAccountModel.defaultUser
+  showPermissions: boolean = false; 
+  showSshCheckbox: boolean = false; 
+  isDefaultUser: boolean = false; 
   showWarning: boolean = false;
   ftpAccount = {
     id: 1,
@@ -123,8 +123,7 @@ export class EditFtpAccountComponent implements OnInit {
   }
 
   onCancel(): void {
-    console.log('Cancelled');
-    this.router.navigate(['/material']);
+    this.router.navigate(['/ftp-manager']);
   }
 
   onPermissionsSubmit(): void {

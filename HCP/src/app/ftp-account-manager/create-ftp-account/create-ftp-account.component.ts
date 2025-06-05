@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-ftp-account',
@@ -28,9 +29,9 @@ export class CreateFtpAccountComponent implements OnInit {
   activeQuantity: number = 2; // Mock serviceDetail.activeQuantity
   limit: number = 50; // Mock serviceDetail.limit
   directoryContent: string = this.platform === 'WIN' ? '/www' : '/htdocs';
-  showWarning: boolean = false; // Toggle warning message
+  showWarning: boolean = false; 
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.ftpForm = this.fb.group({
       username: ['', [
         Validators.required,
@@ -82,9 +83,7 @@ export class CreateFtpAccountComponent implements OnInit {
     }
   }
 
-  onCancel(): void {
-    console.log('Cancelled');
-    // Navigate to previous page (e.g., /ftpaccounts)
-    // this.router.navigate(['/ftpaccounts']);
+  onCancel(): void {    
+    this.router.navigate(['/ftp-manager']);
   }
 }

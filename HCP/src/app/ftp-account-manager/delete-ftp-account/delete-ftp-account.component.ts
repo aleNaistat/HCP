@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-delete-ftp-account',
   standalone: true,
@@ -61,9 +62,7 @@ export class DeleteFtpAccountComponent implements OnInit {
     // e.g., this.http.post('/ftpaccounts/delete_handler', this.deleteForm.value).subscribe();
   }
 
-  onCancel(): void {
-    console.log('Cancelled');
-    // Navigate to FTP accounts list
+  onCancel(): void {        
     this.router.navigate(['/ftp-manager']);
   }
 }
