@@ -1,0 +1,138 @@
+.ctb-window {
+  width: 745px;
+}
+
+.winmiddle {
+  min-height: 351px;
+}
+
+.winbody {
+  min-height: 311px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.corners-blue {
+  border: 1px solid #00BCD4; /* Azure */
+}
+
+#ftp-pw-status {
+  background: #ededed;
+  margin: -20px -20px 15px -20px;
+  padding: 20px 30px;
+}
+
+.heading {
+  color: #666;
+  font-size: 26px;
+  margin: 0;
+}
+
+.subheading {
+  color: #666;
+  font-size: 16px;
+  line-height: 18px;
+  margin-top: 10px;
+}
+
+#ftp-pw-enhancements {
+  padding: 0 10px;
+}
+
+.ftp-wizard-error {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.select-enhancements {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 25px;
+}
+
+.select-enhancements tr td {
+  border-bottom: 1px solid #d6d6d6;
+  vertical-align: top;
+  padding: 10px;
+}
+
+.select-enhancements tr:last-child td {
+  border-bottom: none;
+}
+
+.icon {
+  width: 72px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.description p {
+  color: #444;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 0 0 2px;
+}
+
+.description .heading {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.learnmore {
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.learnmore a {
+  color: #00BCD4;
+  text-decoration: none;
+}
+
+.learnmore a:hover {
+  text-decoration: underline;
+}
+
+.check {
+  width: 24px;
+  text-align: center;
+  padding-top: 12px;
+}
+
+.button {
+  width: 210px;
+  text-align: center;
+  float: right;
+}
+
+.terms {
+  margin: 30px 0 10px;
+  width: 480px;
+}
+
+.terms p {
+  font-size: 11px;
+  color: #999;
+  line-height: 14px;
+}
+
+.terms a {
+  color: #00BCD4;
+}
+
+.loading-ani {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.ani-content {
+  text-align: center;
+}
+
+.loader {
+  display: block;
+  margin: 0 auto 10px;
+}

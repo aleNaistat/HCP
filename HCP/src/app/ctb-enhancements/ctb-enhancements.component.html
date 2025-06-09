@@ -1,0 +1,72 @@
+<div class="ctb-window">
+  <div class="winmiddle">
+    <div class="winbody corners-blue">
+      <div class="ctb-content" *ngIf="!isLoading">
+        <div id="ftp-pw-status">
+          <p class="heading">Your FTP password is being updated.</p>
+          <p class="subheading">
+            Take a minute to confirm these valuable enhancements to your Web Hosting package.<br />
+            For a limited time, you can try these for FREE*!
+          </p>
+        </div>
+
+        <div id="ftp-pw-enhancements">
+          <input type="hidden" id="ctbAccountId" [value]="data.accountId" />
+          <input type="hidden" id="ctbAdTrackingBannerId" [value]="data.adTrackingBannerId" />
+          <input type="hidden" id="ctbSource" [value]="data.source" />
+
+          <div class="ftp-wizard-error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+          <form [formGroup]="enhancementsForm">
+            <table class="select-enhancements">
+              <tr>
+                <td class="icon">
+                  <img src="/assets/images/icon-ssl-secure.png" alt="Xpress SSL" />
+                </td>
+                <td class="description">
+                  <p class="heading">Xpress SSL</p>
+                  <p>Secure your site and protect your customers.</p>
+                  <p class="learnmore">
+                    <a href="#" matTooltip="Xpress SSL: Online security is essential to conducting business online - and it's foremost in the minds of your customers. Whether the website collects personal information, login credentials or payment information, Xpress SSL delivers the protection you and your customers need.">Learn More</a>
+                  </p>
+                </td>
+                <td class="check">
+                  <mat-checkbox formControlName="dvssl"></mat-checkbox>
+                </td>
+              </tr>
+              <tr>
+                <td class="icon">
+                  <img src="/assets/images/icon-mytime.png" alt="MyTime Support" />
+                </td>
+                <td class="description">
+                  <p class="heading">MyTime Support</p>
+                  <p>Get professional help for transferring files or setting up your site.</p>
+                  <p class="learnmore">
+                    <a href="#" matTooltip="Remote technical assistance available on your schedule! Let our dedicated technical experts do the work so you can concentrate on your business. MyTime Support handles many services such as: Website Relocation, SSL installation, Website Content Recovery, Email Setup, Troubleshooting Code on your website and much more! Give yourself some time back and try our MyTime Support experts today!">Learn More</a>
+                  </p>
+                </td>
+                <td class="check">
+                  <mat-checkbox formControlName="mytime"></mat-checkbox>
+                </td>
+              </tr>
+            </table>
+
+            <div class="button">
+              <button mat-raised-button color="primary" (click)="submitEnhancements()">Add to my Hosting Package</button>
+            </div>
+
+            <div class="terms">
+              <p>* <a routerLink="/ctb-terms" target="_blank">See terms</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="loading-ani" *ngIf="isLoading">
+        <div class="ani-content">
+          <img src="/assets/images/loader.gif" class="loader" alt="Loading" />
+          <div>Processing...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
