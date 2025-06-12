@@ -8,6 +8,8 @@ import { FtpPermissionsComponent } from './ftp-account-manager/ftp-permissions/f
 import { AwstatsComponent } from './open-source-app/awstats/awstats.component';
 import { OpenSourceLibraryComponent } from './open-source-app/open-source-library/open-source-library.component';
 import { OpenSourceAppsListComponent } from './open-source-app/open-source-apps-list/open-source-apps-list.component';
+import { CustomErrorPagesComponent } from './custom-error-pages/custom-error-pages.component';
+import { CustomizeErrorPageComponent } from './custom-error-pages/customize-error-page/customize-error-page.component';
 
 export const routes: Routes = [
   { path: '', component: HcpHomeMenuComponent },
@@ -22,4 +24,6 @@ export const routes: Routes = [
   { path: 'open-source-app/install', redirectTo: '/open-source-app/list' }, // Placeholder for wizard
   { path: 'php-manager', redirectTo: '/open-source-app/list' }, // Placeholder
   { path: 'iis-settings', redirectTo: '/open-source-app/list' },
+  { path: 'custom-error-pages', component: CustomErrorPagesComponent  },
+  { path: 'customize-error-page/:errorType', component: CustomizeErrorPageComponent },
 ];

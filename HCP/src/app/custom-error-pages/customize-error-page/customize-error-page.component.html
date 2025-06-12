@@ -1,0 +1,33 @@
+<mat-card class="container">
+    <mat-card-header class="title">Custom Error Pages</mat-card-header>
+    <div class="content">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="errorType">
+            <td mat-cell *matCellDef="let element" style="text-align: right"> {{element.title}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="current">
+            <td mat-cell *matCellDef="let element"> 
+
+                <div  *ngIf="element.title == 'Page:'; then page; else inputTemplate"></div>
+
+                <ng-template #page>
+                    <span>{{element.current}} </span>
+                  </ng-template>
+                  
+                  <ng-template #inputTemplate>
+                    <textarea class="input-textarea" [value]="element.current" readonly></textarea>
+                  </ng-template>
+            </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="options">
+            <td mat-cell *matCellDef="let element"><a routerLink="/customize-error-page" class="link">{{element.link}}</a></td>
+            </ng-container>
+        
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+
+</mat-card>

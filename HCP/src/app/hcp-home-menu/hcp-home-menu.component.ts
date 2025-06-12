@@ -17,43 +17,43 @@ export class HcpHomeMenuComponent {
       {
         title: 'Website Builder Tool',
         desc:'Quickly and easily create a customized Website',
-        icon: 'https://cdn3.iconfinder.com/data/icons/solid-locations-icon-set/64/Working_Tools_2-128.png'
+        icon: 'https://hcp.networksolutions.com/resources/inquent/images/english/serviceOverview/tb-icon-wsbuilder.png'
       },
       {   
         title: 'FTP Account Manager',
         routing: '/ftp-manager',
         desc: 'Manage your FTP accounts',
-        icon: 'https://cdn3.iconfinder.com/data/icons/solid-locations-icon-set/64/Working_Tools_2-128.png'
+        icon: 'https://hcp.networksolutions.com/resources/inquent/images/english/serviceOverview/tb-icon-ftpacntmgr.gif'
       },
       {   
         title: 'Open Source Applications',
         desc: 'Add blogs, wikis, forums or other applications.',
-        icon: 'https://cdn3.iconfinder.com/data/icons/solid-locations-icon-set/64/Working_Tools_2-128.png'
+        icon: 'https://hcp.networksolutions.com/resources/inquent/images/english/serviceOverview/tb-icon-opensource.gif'
       },
       {   
         title: 'Cloud Backup',
         desc: 'Create and restore back ups with CodeGuard',
-        icon: 'https://cdn3.iconfinder.com/data/icons/solid-locations-icon-set/64/Working_Tools_2-128.png'
+        icon: 'https://hcp.networksolutions.com/resources/inquent/images/english/serviceOverview/tb-icon-codeguard.png'
       },
       {   
         title: 'Cloud Backup',
         desc: 'Create and restore back ups with CodeGuard',
-        icon: 'https://cdn3.iconfinder.com/data/icons/solid-locations-icon-set/64/Working_Tools_2-128.png'
+        icon: 'https://hcp.networksolutions.com/resources/inquent/images/english/serviceOverview/tb-icon-codeguard.png'
       },
       {   
         title: 'Cloud Backup',
         desc: 'Create and restore back ups with CodeGuard',
-        icon: 'https://cdn3.iconfinder.com/data/icons/solid-locations-icon-set/64/Working_Tools_2-128.png'
+        icon: 'https://hcp.networksolutions.com/resources/inquent/images/english/serviceOverview/tb-icon-codeguard.png'
       },
       {   
         title: 'Cloud Backup',
         desc: 'Create and restore back ups with CodeGuard',
-        icon: 'https://cdn3.iconfinder.com/data/icons/solid-locations-icon-set/64/Working_Tools_2-128.png'
+        icon: 'https://hcp.networksolutions.com/resources/inquent/images/english/serviceOverview/tb-icon-codeguard.png'
       },
       {   
         title: 'Cloud Backup',
         desc: 'Create and restore back ups with CodeGuard',
-        icon: 'https://cdn3.iconfinder.com/data/icons/solid-locations-icon-set/64/Working_Tools_2-128.png'
+        icon: 'https://hcp.networksolutions.com/resources/inquent/images/english/serviceOverview/tb-icon-codeguard.png'
       },
       
   ]},
@@ -63,22 +63,28 @@ export class HcpHomeMenuComponent {
       {
         title: 'Website Builder Tool',
         desc:'quickly and easily create a customized Website',
-        icon: 'https://cdn3.iconfinder.com/data/icons/solid-locations-icon-set/64/Working_Tools_2-128.png'
+        icon: 'https://hcp.networksolutions.com/resources/inquent/images/english/serviceOverview/tb-icon-wsbuilder.png'
       },
       {   
         title: 'FTP Account Manager',
         desc: 'Manage your FTP accounts',
-        icon: 'https://cdn3.iconfinder.com/data/icons/solid-locations-icon-set/64/Working_Tools_2-128.png'
+        icon: 'https://hcp.networksolutions.com/resources/inquent/images/english/serviceOverview/tb-icon-ftpacntmgr.gif'
       },
       {   
         title: 'Open Source Applications',
         desc: 'Add blogs, wikis, forums or other applications.',
-        icon: 'https://cdn3.iconfinder.com/data/icons/solid-locations-icon-set/64/Working_Tools_2-128.png'
+        icon: 'https://hcp.networksolutions.com/resources/inquent/images/english/serviceOverview/tb-icon-opensource.gif'
       },
       {   
         title: 'Cloud Backup',
         desc: 'Create and restore back ups with CodeGuard',
-        icon: 'https://cdn3.iconfinder.com/data/icons/solid-locations-icon-set/64/Working_Tools_2-128.png'
+        icon: 'https://hcp.networksolutions.com/resources/inquent/images/english/serviceOverview/tb-icon-codeguard.png'
+      },
+      {   
+        title: 'Custom Error Pages',
+        routing: '/custom-error-pages',
+        desc: 'Create and restore back ups with CodeGuard',
+        icon: 'https://hcp.networksolutions.com/resources/inquent/images/english/serviceOverview/tb-icon-customerror.gif'
       },
   ]}
 ]
