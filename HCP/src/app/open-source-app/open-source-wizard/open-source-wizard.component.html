@@ -1,0 +1,44 @@
+<div class="openSourceWizz">
+  <h1>&nbsp;</h1>
+  <br style="clear: left;" />
+
+  <!-- App Pool Settings -->
+  <div *ngIf="changeAppPoolSettings" id="appPoolStatus" class="wrap">
+    <div id="appPoolStatusMessage">
+      <app-message-box [message]="appPoolStatusMessage"></app-message-box>
+    </div>
+    <div id="applicationPoolStatus">{{ appPoolStatusMessage || '&nbsp;' }}</div>
+    <button
+      *ngIf="appPoolStatusMessage !== 'The modification of the Net Framework and the Pipeline Mode is already done.'"
+      id="changeAppPoolSettingsButton"
+      class="btn-save-changes"
+      (click)="changeAppPoolSettingsFn()"
+    >
+      Save Changes
+    </button>
+    <p>&nbsp;</p>
+  </div>
+  <br style="clear: left;" *ngIf="changeAppPoolSettings" />
+
+  <!-- Wizard Form -->
+  <div class="wizzCols" [ngClass]="{ Off: isLoading }">
+    <div *ngIf="isLoading" class="loadingWiz">Please wait ...</div>
+    <div class="stepItem">
+      <form [formGroup]="wizardForm" (ngSubmit)="submitWizard()">
+        <!-- Dynamic fields (example for BLOG_DOMAIN) -->
+        <div *ngIf="wizardForm.get('BLOG_DOMAIN')">
+          <label for="blogDomain">Select Domain</label>
+          <select id="blogDomain" formControlName="BLOG_DOMAIN">
+            <option *ngFor="let domain of domains" [value]="domain.domainHostname">
+              {{ domain.domainHostname }}
+            </option>
+          </select>
+        </div>
+        <!-- Add other dynamic fields based on wizardForm -->
+        <button type="submit" [disabled]="wizardForm.invalid">Submit</button>
+      </form>
+    </div>
+    <div class="toolTip">&nbsp;</div>
+    <br style="clear: all;" />
+  </div>
+</div>

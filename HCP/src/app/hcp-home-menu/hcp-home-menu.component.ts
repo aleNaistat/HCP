@@ -27,6 +27,7 @@ export class HcpHomeMenuComponent {
       },
       {   
         title: 'Open Source Applications',
+        routing: '/open-source-app/list',
         desc: 'Add blogs, wikis, forums or other applications.',
         icon: 'https://hcp.networksolutions.com/resources/inquent/images/english/serviceOverview/tb-icon-opensource.gif'
       },

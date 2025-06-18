@@ -59,6 +59,7 @@ interface CategorizedAppsResponse {
 @Injectable({ providedIn: 'root' })
 export class OpenSourceService {
   constructor(private http: HttpClient) {}
+  private apiBaseUrl = '/osapps';
 
   getAppGroups(): Observable<AppGroupsResponse> {
     return of({ appGroups: [], serviceDetails: [], sCode: 'UNIX' }); // Mock
@@ -96,5 +97,34 @@ export class OpenSourceService {
 
   checkIISSettings(): Observable<IISSettingsResponse> {
     return this.http.get<IISSettingsResponse>('/osapps/iisAppPoolSettings');
+  }
+
+  getWizardForm(params: { [key: string]: string }): Observable<any> {
+    let httpParams = new HttpParams();
+    for (const key in params) {
+      if (params[key]) {
+        httpParams = httpParams.set(key, params[key]);
+      }
+    }
+    return this.http.get(`${this.apiBaseUrl}/wizard`, { params: httpParams });
+  }
+
+  submitWizard(payload: any): Observable<any> {
+    return this.http.post(`${this.apiBaseUrl}/wizardsubmit`, payload);
+  }
+
+  getDomains(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiBaseUrl}/domains`);
+  }
+
+  changeAppPoolSettings(pipeline: string, netversion: string): Observable<string> {
+    const params = new HttpParams()
+      .set('pipeline', pipeline)
+      .set('netversion', netversion);
+    return this.http.get<string>(`${this.apiBaseUrl}/changesettings`, { params });
+  }
+
+  getSynchronizerToken(): Observable<string> {   
+    return of('dummy-token');
   }
 }
