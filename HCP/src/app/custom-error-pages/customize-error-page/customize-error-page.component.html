@@ -1,6 +1,8 @@
 <mat-card class="container">
     <mat-card-header class="title">Custom Error Pages</mat-card-header>
     <div class="content">
+
+        <p class="subtitle"><b><span style="color: #555">Currently Editing:</span> {{ errorType }}</b></p>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
             <ng-container matColumnDef="errorType">
@@ -9,15 +11,25 @@
         
             <ng-container matColumnDef="current">
             <td mat-cell *matCellDef="let element"> 
-
                 <div  *ngIf="element.title == 'Page:'; then page; else inputTemplate"></div>
 
                 <ng-template #page>
-                    <span>{{element.current}} </span>
+                    <span>{{ urlString }} </span>
                   </ng-template>
                   
                   <ng-template #inputTemplate>
-                    <textarea class="input-textarea" [value]="element.current" readonly></textarea>
+                    <div class="error-container">
+                        <textarea class="input-textarea"
+                        [ngModel]="getFieldValue(element.title)"
+                        (input)=" onFieldChange($event, element.title)"
+                        [maxLength]="maxCharacters"
+                        style="resize: none;"
+                        ></textarea>
+                        <span *ngIf="element.title === 'Error message:'" class="error-span">
+                            <!-- Your error content here -->
+                            no html, 500 characters max You have {{ getRemainingCharacters(element.title)  }} characters left.
+                        </span>
+                    </div>
                   </ng-template>
             </td>
             </ng-container>
@@ -25,9 +37,16 @@
             <ng-container matColumnDef="options">
             <td mat-cell *matCellDef="let element"><a routerLink="/customize-error-page" class="link">{{element.link}}</a></td>
             </ng-container>
-        
+            
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <div class="submit-row">
+            <button mat-raised-button color="primary" class="submit-button" (click)="goBack()">Cancel</button>
+            <div class="submit-buttons">
+                <button mat-raised-button color="primary" class="submit-button">Preview</button>
+                <button mat-raised-button color="primary" class="submit-button">Save and Publish</button>
+            </div>
+        </div>
     </div>
 
 </mat-card>
