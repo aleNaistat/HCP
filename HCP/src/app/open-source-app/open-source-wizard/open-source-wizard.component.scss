@@ -1,0 +1,56 @@
+.openSourceWizz {
+  padding: 20px;
+  h1 {
+    margin: 0;
+  }
+  .wrap {
+    margin-bottom: 20px;
+  }
+  .wizzCols {
+    &.Off {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .loadingWiz {
+      text-align: center;
+      font-weight: bold;
+    }
+    .stepItem {
+      margin: 10px 0;
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        select {
+          padding: 5px;
+          width: 200px;
+        }
+        button {
+          padding: 10px;
+          background: #007bff;
+          color: white;
+          border: none;
+          cursor: pointer;
+          &[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+    .toolTip {
+      margin-top: 10px;
+    }
+  }
+  .btn-save-changes {
+    padding: 10px 20px;
+    background: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  #appPoolStatusMessage,
+  #applicationPoolStatus {
+    margin-bottom: 10px;
+  }
+}
